@@ -4,7 +4,7 @@
   <h1>autoware.universe</h1>
   
   <p>
-    autoware.universe is an open-source software project for autonomous driving which is built on ROS2 and enables commercial deployment of autonomous driving in a broad range of vehicles and applications. 
+    autoware.universe is an open-source software project for autonomous driving which is built on ROS2 and enables commercial deployment of autonomous driving in a broad range of vehicles and applications. Autoware provides a rich set of self-driving modules composed of sensing, computing, and actuation capabilities. 
   </p>
 
   
@@ -35,23 +35,28 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-  - [Single-Line Source Installation](#single-line-source-installation)
-  - [Simulation tutorial](#simulation-tutorial)
-    - [Planning Scenario](#planning-scenario)
-    - [Parking Scenario](#parking-scenario)
-    - [Advanced scenario](#advanced-scenario)
-    - [Scenario test simulation](#scenario-test-simulation)
-    - [Rosbag replay simulation](#rosbag-replay-simulation)
-  - [CARLA Bridge](#carla-bridge)
+  - [autoware.universe](#autowareuniverse)
+    - [Single-Line Source Installation](#single-line-source-installation)
+    - [Official Tutorial](#official-tutorial)
+  - [CARLA](#carla)
+    - [Build CARLA on Linux](#build-carla-on-linux)
+    - [Installation ROS2 Bridge](#installation-ros2-bridge)
+  - [MATLAB-Simulink](#matlab-simulink)
+    - [CARLA - MATLAB-Simulink Interface](#carla---matlab-simulink-interface)
+    - [Installation ROS2 Bridge](#installation-ros2-bridge-1)
+    - [RoadRunner](#roadrunner)
+  - [Runtime Manager](#runtime-manager)
+    - [Foxglove Studio](#foxglove-studio)
+    - [Requirements](#requirements)
   - [Roadmap](#roadmap)
   - [Source](#source)
   - [Troubleshooting](#troubleshooting)
   
-
+## autoware.universe
 <!-- Installation -->
-## Single-Line Source Installation
+### Single-Line Source Installation
 
-- The following bash script installs the dependecies using Ansible and sets up the workspace for autoware.universe. To set up workspace, install dependencies and build the workspace run the following commands: 
+The following bash script installs the dependecies using Ansible and sets up the workspace for autoware.universe. To set up workspace, install dependencies and build the workspace run the following commands: 
   
 ```bash
 git clone https://github.com/CagriCatik/autoware.universe.git
@@ -59,7 +64,7 @@ cd ~/autoware.universe/install
 chmod +x ./autoware-universe.sh
 bash ./autoware-universe.sh
 ```
-- To update the workspace run the following command: 
+To update the workspace run the following command: 
 
 ```bash
 cd ~/autoware.universe/install
@@ -67,132 +72,104 @@ chmod +x ./update.sh
 bash ./update.sh
 ```
 
-## Simulation tutorial
-
+### Official Tutorial
 Simulations provide a way of verifying Autoware's functionality before field testing with an actual vehicle.
-There are three main types of simulation that can be run ad hoc or via a scenario runner.
+There are three main types of simulation (Planning, Rosbag, Digital twin simulation) that can be run ad hoc or via a scenario runner. [Simulation tutorials](https://github.com/CagriCatik/autoware.universe/autoware/README.md) explain several tutorials that you should try after installation
 
-### Planning Scenario
-- Planning simulation uses simple dummy data to test the Planning and Control components - specifically path generation, path following and obstacle avoidance. 
-- It verifies that a vehicle can reach a goal destination while avoiding pedestrians and surrounding cars, and is another method for verifying the validity of Lanelet2 maps. 
-- It also allows for testing of traffic light handling.
-- **Step 1:** Launch Autoware wiht following commands:
+[Go back](#table-of-contents)
+## [CARLA](https://carla.readthedocs.io/en/latest/)
 
-```sh
-source ~/autoware/install/setup.bash
-ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/autoware.universe/simulation/sample-map-planning vehicle_model:=sample_vehicle sensor_model:=sample_sensor_kit
+### Build CARLA on Linux
+
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/build.md)
+
+```bash
+cd ~/autoware.universe/
+chmod +x ./
+bash ./
 ```
 
-- **Step 2:** `Panels -> Add new panel`  select `AutowareStatePanel` and `TrafficLightPublishPanel`
-- **Step 3:** Set an initial pose for the ego vehicle `2D Pose Estimate`
-- **Step 4:** Set a goal pose for the ego vehicle `2D Goal Pose`
-- **Step 5:** Engage the ego vehicle on `AutoWareStatePanel`. As an alternative to engage the ego vehicle run the following command:
-```sh
-source ~/autoware/install/setup.bash
-ros2 topic pub /autoware/engage autoware_auto_vehicle_msgs/msg/Engage "engage: true" -1
+### Installation ROS2 Bridge
+
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/install.md)
+
+```bash
+cd ~/autoware.universe/
+chmod +x ./
+bash ./
+```
+[Go back](#table-of-contents)
+
+## MATLAB-Simulink
+
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/README.md)
+
+```bash
+cd ~/autoware.universe/
+chmod +x ./
+bash ./
 ```
 
-### Parking Scenario
+### CARLA - MATLAB-Simulink Interface
 
-- **Step:** After launching the simulation set an initial and a goal pose on a parking spot, then engage the ego vehicle
-- **Observation 1:** When the vehicle approaches the goal, it will switch from lane driving mode to parking mode.
-- **Observation 1:** After that, the vehicle will reverse into the destination parking spot.
-  
-```sh
-
-ros2 launch random_test_runner random_test.launch.py \
-  architecture_type:=awf/universe \
-  sensor_model:=sample_sensor_kit \
-  vehicle_model:=sample_vehicle
-
+```bash
+cd ~/autoware.universe/
+chmod +x ./
+bash ./
 ```
 
-### Advanced scenario
+### Installation ROS2 Bridge
 
-Dummy Objects
- 
-- **Step 1:** Click the  `2D Dummy Car` or `2D Dummy Pedestrian` 
-- **Step 2:** Set the pose of  `2D Dummy Car` or `2D Dummy Pedestrian` by click and drag
-- **Step 3:** Set or change the velocity  of the dummy objects in the `Tool Properties -> 2D Dummy Car/Pedestrian` panel
-- **Optional:** Delete any dummy objects placed in the view by clicking the `Delete All Objects` button in the toolbar.
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/install.md)
 
-Traffic Light Recognition
-
-By default, traffic lights on the map are all treated as if they are set to green. As a result, when a path is created that passed through an intersection with a traffic light, the ego vehicle will drive through the intersection without stopping. The following steps explain how to set and reset traffic lights in order to test how the Planning component will respond.
-
-
-- **Step 1:** Set traffic light In TrafficLightPublishPanel, set the ID and color of the traffic light, then click the `SET` button.
-- **Step 1:** Click the `PUBLISH` button to send the traffic light status to the simulator. Any planned path that goes past the selected traffic light will then change accordingly.
-- **Optional:** Update the color of the traffic light by selecting the next color and clicking `SET` button.
-
-### Scenario test simulation
-
-Move to the workspace dir and source the workspace setup script. Run the **scenario test simulation** with following command:
-
-```sh
-cd ~/autoware
-source install/setup.bash
-ros2 launch scenario_test_runner scenario_test_runner.launch.py \
-  architecture_type:=awf/universe \
-  record:=false \
-  scenario:='$(find-pkg-share scenario_test_runner)/scenario/sample.yaml' \
-  sensor_model:=sample_sensor_kit \
-  vehicle_model:=sample_vehicle
-```
-- Move to the workspace dir and source the workspace setup script. Run the **random test simulation**  with following command:
-
-```sh
-cd ~/autoware
-source install/setup.bash
-ros2 launch random_test_runner random_test.launch.py \
-  architecture_type:=awf/universe \
-  sensor_model:=sample_sensor_kit \
-  vehicle_model:=sample_vehicle
+```bash
+cd ~/autoware.universe/
+chmod +x ./
+bash ./
 ```
 
-### Rosbag replay simulation
+### RoadRunner
 
-Rosbag replay simulation uses prerecorded rosbag data to test the following aspects of the Localization and Perception components:
-- Localization: Estimation of the vehicle's location on the map by matching sensor and vehicle feedback data to the map.
-- Perception: Using sensor data to detect, track and predict dynamic objects such as surrounding cars, pedestrians, and other objects
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/install.md)
 
 
-Launch Autoware:
+[Go back](#table-of-contents)
+## Runtime Manager
 
-```sh
-source ~/autoware/install/setup.bash
-ros2 launch autoware_launch logging_simulator.launch.xml map_path:=$HOME/autoware.universe/rosbag/sample-map-rosbag vehicle_model:=sample_vehicle sensor_model:=sample_sensor_kit
+### [Foxglove Studio](https://foxglove.dev/blog/using-rosbridge-with-ros2)
+
+Single-Line source installation
+
+```bash
+cd ~/autoware.universe/runtime-manager
+chmod +x ./install.sh && bash ./install.sh
 ```
+### Requirements
 
-Play the sample rosbag file:
-
-```sh
-source ~/autoware/install/setup.bash
-ros2 bag play ~/autoware.universe/rosbag/sample-rosbag/sample.db3 -r 0.2
-# WTF! No rosbag in the zip-file
-```
-
-## CARLA Bridge
-
-- #TODO
+[Go back](#table-of-contents)
 
 <!-- Roadmap -->
 ## Roadmap
-* [ ] Understand the tutorials of autoware.universe
-* [ ] Understand the architecture of autoware.universe
+* [ ] [Autoware Core/Universe](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/difference-from-ai-and-auto/)
+* [ ] [Understand the tutorials of autoware.universe](https://autowarefoundation.github.io/autoware-documentation/main/tutorials/)
+* [ ] [Understand the architecture of autoware.universe](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture/)
 * [ ] [Runtime Manager GUI](https://github.com/CPFL/Autoware-Manuals/tree/master/en) 
+* [ ] [Foxglove Studio visualization and debugging tool](https://foxglove.dev/)
+* [ ] Installation & Setup MATLAB-Simulink
 * [ ] autoware.universe - CARLA - Bridge
 * [ ] CARLA - MATLAB/Simulink - autoware.universe
 * [ ] [RoadRunner Scenario](https://www.mathworks.com/products/roadrunner-scenario.html)
 
-
+[Go back](#table-of-contents)
 <!-- Source -->
 ## Source
-
+ - [Official Repository - autoware.universe](https://github.com/autowarefoundation/autoware.universe)
  - [Autoware Documentation](https://autowarefoundation.github.io/autoware-documentation/main/)
  - [Autoware Tutorials](https://autowarefoundation.github.io/autoware-documentation/main/tutorials/)
+ - [ROS Bridge installation for ROS2](https://carla.readthedocs.io/projects/ros-bridge/en/latest/ros_installation_ros2/)
+ - [Getting Started with RoadRunner](https://de.mathworks.com/videos/series/getting-started-with-roadrunner.html)
 
-
+[Go back](#table-of-contents)
 <!-- Troubleshooting -->
 ## Troubleshooting
 
@@ -200,3 +177,5 @@ ros2 bag play ~/autoware.universe/rosbag/sample-rosbag/sample.db3 -r 0.2
   - Uninstall ROS Galactic, if installed before
   - Purge/Uninstall the `protobuf`
   - Run the `Single-Line-Installation` for autoware.universe
+- Problem with CARLA-Build
+  - a 
