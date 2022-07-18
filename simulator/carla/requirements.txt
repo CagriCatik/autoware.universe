@@ -1,0 +1,14 @@
+numpy; python_version < '3.0'
+numpy==1.18.4; python_version >= '3.0'
+psutil
+py-cpuinfo
+pygame
+python-tr
+future
+matplotlib
+open3d
+Pillow
+Shapely==1.6.4.post2
+distro
+networkx
+carla-simulator==0.9.13

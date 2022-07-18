@@ -1,0 +1,72 @@
+{
+  "configById": {
+    "3D Panel!12f6a2f": {
+      "autoSyncCameraState": false,
+      "autoTextBackgroundColor": true,
+      "cameraState": {
+        "targetOffset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "checkedKeys": [
+        "name:Topics"
+      ],
+      "clickToPublishPoseTopic": "/move_base_simple/goal",
+      "clickToPublishPointTopic": "/clicked_point",
+      "clickToPublishPoseEstimateTopic": "/initialpose",
+      "clickToPublishPoseEstimateXDeviation": 0.5,
+      "clickToPublishPoseEstimateYDeviation": 0.5,
+      "clickToPublishPoseEstimateThetaDeviation": 0.26179939,
+      "customBackgroundColor": "#000000",
+      "diffModeEnabled": true,
+      "expandedKeys": [
+        "name:Topics"
+      ],
+      "followMode": "follow",
+      "followTf": "base_link",
+      "modifiedNamespaceTopics": [],
+      "pinTopics": false,
+      "settingsByKey": {},
+      "useThemeBackgroundColor": true
+    },
+    "Table!4aaqgh6": {
+      "topicPath": "/control/command/turn_indicators_cmd"
+    },
+    "DiagnosticStatusPanel!2jqld8h": {
+      "topicToRender": "/diagnostics_err"
+    },
+    "Tab!30m3yb": {
+      "activeTabIdx": 1,
+      "tabs": [
+        {
+          "title": "1",
+          "layout": "3D Panel!12f6a2f"
+        },
+        {
+          "title": "2",
+          "layout": "Table!4aaqgh6"
+        }
+      ]
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {
+    "8ec8766b-82d8-4c92-ad2c-d235b1db5b8b": {
+      "sourceCode": "// The ./types module provides helper types for your Input events and messages.\nimport { Input, Message } from \"./types\";\n\n// Your node can output well-known message types, any of your custom message types, or\n// complete custom message types.\n//\n// Use `Message` to access your data source types or well-known types:\n// type Twist = Message<\"geometry_msgs/Twist\">;\n//\n// Conventionally, it's common to make a _type alias_ for your node's output type\n// and use that type name as the return type for your node function.\n// Here we've called the type `Output` but you can pick any type name.\ntype Output = {\n  hello: string;\n};\n\n// These are the topics your node \"subscribes\" to. Studio will invoke your node function\n// when any message is received on one of these topics.\nexport const inputs = [\"/input/topic\"];\n\n// Any output your node produces is \"published\" to this topic. Published messages are only visible within Studio, not to your original data source.\nexport const output = \"/studio_node/output_topic\";\n\n// This function is called with messages from your input topics.\n// The first argument is an event with the topic, receive time, and message.\n// Use the `Input<...>` helper to get the correct event type for your input topic messages.\nexport default function node(event: Input<\"/input/topic\">): Output {\n  return {\n    hello: \"world!\",\n  };\n};",
+      "name": "8ec8766b"
+    }
+  },
+  "linkedGlobalVariables": [],
+  "playbackConfig": {
+    "speed": 1,
+    "messageOrder": "receiveTime"
+  },
+  "layout": {
+    "direction": "row",
+    "first": "DiagnosticStatusPanel!2jqld8h",
+    "second": "Tab!30m3yb",
+    "splitPercentage": 31.412639405204462
+  }
+}

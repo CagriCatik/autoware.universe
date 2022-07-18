@@ -4,7 +4,7 @@
   <h1>autoware.universe</h1>
   
   <p>
-    autoware.universe is an open-source software project for autonomous driving which is built on ROS2 and enables commercial deployment of autonomous driving in a broad range of vehicles and applications. Autoware provides a rich set of self-driving modules composed of sensing, computing, and actuation capabilities. 
+    Autoware is an open-source autonomous driving software based on Linux and ROS. autoware.universe is an open-source software project for autonomous driving which is built on ROS2 and enables commercial deployment of autonomous driving in a broad range of vehicles and applications. Autoware provides a rich set of self-driving modules composed of sensing, computing, and actuation capabilities. 
   </p>
 
   
@@ -33,17 +33,25 @@
 
 <!-- Table of Contents -->
 # Table of Contents
-
+This repository is constantly under construction . For this reason, some links may not work properly.
 - [Table of Contents](#table-of-contents)
   - [autoware.universe](#autowareuniverse)
-    - [Single-Line Source Installation](#single-line-source-installation)
-    - [Official Tutorial](#official-tutorial)
+    - [Installation](#installation)
+    - [Tutorials](#tutorials)
   - [CARLA](#carla)
     - [Build CARLA on Linux](#build-carla-on-linux)
+    - [Tutorial](#tutorial)
     - [Installation ROS2 Bridge](#installation-ros2-bridge)
+  - [tierIVsim](#tierivsim)
+    - [Installation](#installation-1)
+    - [Tutorial](#tutorial-1)
+  - [MORAI SIM: Drive](#morai-sim-drive)
+    - [Installation](#installation-2)
+    - [Tutorial](#tutorial-2)
   - [MATLAB-Simulink](#matlab-simulink)
+    - [Installation on Ubuntu 20.04](#installation-on-ubuntu-2004)
     - [CARLA - MATLAB-Simulink Interface](#carla---matlab-simulink-interface)
-    - [Installation ROS2 Bridge](#installation-ros2-bridge-1)
+    - [CARLA - ROS2 Bridge](#carla---ros2-bridge)
     - [RoadRunner](#roadrunner)
   - [Runtime Manager](#runtime-manager)
     - [Foxglove Studio](#foxglove-studio)
@@ -52,99 +60,82 @@
   - [Source](#source)
   - [Troubleshooting](#troubleshooting)
   
-## autoware.universe
-<!-- Installation -->
-### Single-Line Source Installation
+## [autoware.universe](https://github.com/CagriCatik/autoware.universe/tree/main/autoware/README.md)
 
-The following bash script installs the dependecies using Ansible and sets up the workspace for autoware.universe. To set up workspace, install dependencies and build the workspace run the following commands: 
-  
-```bash
-git clone https://github.com/CagriCatik/autoware.universe.git
-cd ~/autoware.universe/install
-chmod +x ./autoware-universe.sh
-bash ./autoware-universe.sh
-```
-To update the workspace run the following command: 
+### Installation
 
-```bash
-cd ~/autoware.universe/install
-chmod +x ./update.sh
-bash ./update.sh
-```
+[Single line source installation of autoware.universe](https://github.com/CagriCatik/autoware.universe/tree/main/autoware/README.md)
 
-### Official Tutorial
-Simulations provide a way of verifying Autoware's functionality before field testing with an actual vehicle.
-There are three main types of simulation (Planning, Rosbag, Digital twin simulation) that can be run ad hoc or via a scenario runner. [Simulation tutorials](https://github.com/CagriCatik/autoware.universe/autoware/README.md) explain several tutorials that you should try after installation
+### Tutorials
 
-[Go back](#table-of-contents)
+[Official tutorials of autoware.universe](https://github.com/CagriCatik/autoware.universe/tree/main/autoware/tutorial/README.md)
+
+
+[<<< Go back](#table-of-contents)
+
+
 ## [CARLA](https://carla.readthedocs.io/en/latest/)
 
 ### Build CARLA on Linux
 
-[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/build.md)
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/README.md)
 
-```bash
-cd ~/autoware.universe/
-chmod +x ./
-bash ./
-```
+### Tutorial 
+
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/Tutorial.md)
 
 ### Installation ROS2 Bridge
 
-[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/install.md)
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/install.md)
 
-```bash
-cd ~/autoware.universe/
-chmod +x ./
-bash ./
-```
+
+[Go back](#table-of-contents)
+
+## [tierIVsim]()
+
+### Installation
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/tree/main/simulator/README.md)
+
+### Tutorial 
+[Tutorial](https://github.com/CagriCatik/autoware.universe/tree/main/simulator/Tutorial.md)
+
+[Go back](#table-of-contents)
+
+
+## [MORAI SIM: Drive](https://www.google.com/search?channel=fs&client=ubuntu&q=MORAI+SIM%3A+Drive)
+
+### Installation
+
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/build.md)
+
+### Tutorial 
+
+[Tutorial](https://github.com/CagriCatik/autoware.universe/simulator/build.md)
+
 [Go back](#table-of-contents)
 
 ## MATLAB-Simulink
 
-[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/README.md)
-
-```bash
-cd ~/autoware.universe/
-chmod +x ./
-bash ./
-```
+### Installation on Ubuntu 20.04 
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/carla/build.md)
 
 ### CARLA - MATLAB-Simulink Interface
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/README.md)
 
-```bash
-cd ~/autoware.universe/
-chmod +x ./
-bash ./
-```
-
-### Installation ROS2 Bridge
-
+### CARLA - ROS2 Bridge
 [Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/install.md)
 
-```bash
-cd ~/autoware.universe/
-chmod +x ./
-bash ./
-```
-
-### RoadRunner
-
+### [RoadRunner]()
 [Installation Manual](https://github.com/CagriCatik/autoware.universe/matlab-simulink/install.md)
-
 
 [Go back](#table-of-contents)
-## Runtime Manager
+## [Runtime Manager](https://github.com/CagriCatik/autoware.universe/tree/main/runtime-manager/README.md)
 
 ### [Foxglove Studio](https://foxglove.dev/blog/using-rosbridge-with-ros2)
 
-Single-Line source installation
+[Installation Manual](https://github.com/CagriCatik/autoware.universe/tree/main/runtime-manager/foxglove/README.md)
 
-```bash
-cd ~/autoware.universe/runtime-manager
-chmod +x ./install.sh && bash ./install.sh
-```
-### Requirements
+### [Requirements](https://github.com/CagriCatik/autoware.universe/tree/main/runtime-manager/requirements/README.md)
 
 [Go back](#table-of-contents)
 
@@ -153,12 +144,18 @@ chmod +x ./install.sh && bash ./install.sh
 * [ ] [Autoware Core/Universe](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/difference-from-ai-and-auto/)
 * [ ] [Understand the tutorials of autoware.universe](https://autowarefoundation.github.io/autoware-documentation/main/tutorials/)
 * [ ] [Understand the architecture of autoware.universe](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture/)
+* [x] Test autoware.universe on tierIVsim
+* [ ] Test autoware.universe on MORAI SIM: Drive
+* [ ] [Re-implementation of Runtime Manager](https://raw.githubusercontent.com/CPFL/Autoware-Manuals/master/en/Autoware_UsersManual_v1.1.pdf)
 * [ ] [Runtime Manager GUI](https://github.com/CPFL/Autoware-Manuals/tree/master/en) 
 * [ ] [Foxglove Studio visualization and debugging tool](https://foxglove.dev/)
-* [ ] Installation & Setup MATLAB-Simulink
-* [ ] autoware.universe - CARLA - Bridge
-* [ ] CARLA - MATLAB/Simulink - autoware.universe
-* [ ] [RoadRunner Scenario](https://www.mathworks.com/products/roadrunner-scenario.html)
+* [x] Installation & Setup MATLAB-Simulink
+* [ ] Implementing of an ROS2-Bridge between autoware.universe - CARLA
+* [ ] Implementing of an interface between CARLA and MATLAB
+* [ ] Implementing of an interface between CARLA and ROS2
+* [ ] Implementing of an interface between Autoware and MATLAB
+* [ ] [Understand the functionality RoadRunner Scenario](https://www.mathworks.com/products/roadrunner-scenario.html)
+* [ ] Test all bash scripts
 
 [Go back](#table-of-contents)
 <!-- Source -->
@@ -173,9 +170,12 @@ chmod +x ./install.sh && bash ./install.sh
 <!-- Troubleshooting -->
 ## Troubleshooting
 
-- Problem with `protobuf-compiler`
+- Problem with `protobuf-compiler` - solved
   - Uninstall ROS Galactic, if installed before
   - Purge/Uninstall the `protobuf`
   - Run the `Single-Line-Installation` for autoware.universe
-- Problem with CARLA-Build
-  - a 
+- Problem with CARLA-Build - solved
+  - Different compiler version between Ubuntu 20.04 and CARLA
+- Problem with CARLA-ROS2-Bridge
+  - Cannot locate rosdep definition for [derived_object_msgs] - not solved
+- Problem with interfacing between CARLA and MATLAB
